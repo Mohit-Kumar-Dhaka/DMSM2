@@ -6,6 +6,20 @@ function saveCart() {
   updateCartBadge();
 }
 
+function showNotification(message) {
+  const toast = document.createElement('div');
+  toast.className = 'notification-toast';
+  toast.innerHTML = `<span>✔️</span> <span>${message}</span>`;
+  document.body.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.classList.add('fade-out');
+    setTimeout(() => {
+      toast.remove();
+    }, 300);
+  }, 3000);
+}
+
 // --- Cart Operations ---
 function addToCart(productId) {
   const product = products.find(p => p.id === productId);
@@ -19,7 +33,7 @@ function addToCart(productId) {
   }
   
   saveCart();
-  alert(`${product.name} added to cart!`);
+  showNotification(`${product.name} added to cart!`);
 }
 
 function removeFromCart(productId) {
